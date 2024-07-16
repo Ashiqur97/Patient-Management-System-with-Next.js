@@ -1,31 +1,42 @@
-import { ID,Models,Query } from "node-appwrite"
-import {users} from "../appwrite.config"
+"use server";
 
+import { ID, Query } from "node-appwrite";
 
+import {
+  BUCKET_ID,
+  DATABASE_ID,
+  ENDPOINT,
+  PATIENT_COLLECTION_ID,
+  PROJECT_ID,
+  storage,
+  users,
+} from "../appwrite.config";
+import { parseStringify } from "../utils";
+
+// CREATE APPWRITE USER
 export const createUser = async (user: CreateUserParams) => {
-    try {
-        const newUser = await users.create(
-            ID.unique(),
-            user.email, 
-            user.phone,
-            undefined,
-            user.name
-        );
-        console.log({newUser})
+  try {
+    // Create new user -> https://appwrite.io/docs/references/1.5.x/server-nodejs/users#create
+    const newuser = await users.create(
+      ID.unique(),
+      user.email,
+      user.phone,
+      undefined,
+      user.name
+    );
 
-        return parseStringify(newUser);
+    console.log({ newuser });
 
-    } catch (error: any) {
-        if(error && error?.code === 409) {
-            const documents = await users.list([
-                Query.equal('email', [user.email]),
-            ])
-            return documents?.users[0];
-        }
+    return parseStringify(newuser);
+  } catch (error: any) {
+    // Check existing user
+    if (error && error?.code === 409) {
+      const existingUser = await users.list([
+        Query.equal("email", [user.email]),
+      ]);
+
+      return existingUser.users[0];
     }
 }
-
-function parseStringify(newUser: Models.User<Models.Preferences>) {
-    throw new Error("Function not implemented.");
 }
 
