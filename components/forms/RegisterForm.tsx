@@ -104,30 +104,29 @@ const RegisterForm =({user}:{user:User}) => {
             name="birthDate"
             label="Date of Birth" iconSrc={""}            />
 
-        <CustomFormField
+            <CustomFormField
             fieldType={FormFieldType.SKELETON}
             control={form.control}
             name="gender"
             label="Gender"
             renderSkeleton={(field) => (
               <FormControl>
-                <RadioGroup 
-                className="flex h-11 gap-6 xl:justify-between" 
-                onValueChange={field.onChange} 
-                defaultValue={field.value}
+                <RadioGroup
+                  className="flex h-11 gap-6 xl:justify-between"
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
                 >
-                    {GenderOptions.map((option) => (
-                      <div key={option} className="radio-group">
-                        <RadioGroupItem value={option} id={option} />
-                        <Label htmlFor={option} className="cursor-pointer">
-                          {option}
-                        </Label>
-                      </div>
-                    ))}
+                  {GenderOptions.map((option, i) => (
+                    <div key={option + i} className="radio-group">
+                      <RadioGroupItem value={option} id={option} />
+                      <Label htmlFor={option} className="cursor-pointer">
+                        {option}
+                      </Label>
+                    </div>
+                  ))}
                 </RadioGroup>
-
               </FormControl>
-            )} iconSrc={""}   />
+            )} iconSrc={""}            />
 
           </div>
 
