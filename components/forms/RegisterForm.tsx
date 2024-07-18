@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import {Form} from "@/components/ui/form"
+import {Form, FormControl} from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import CustomFormField from "../CustomFormField"
 import SubmitButton from "../SubmitButton"
@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/actions/patient.action"
 import Register from "@/app/patients/[userId]/register/page"
 import { FormFieldType } from "./PatientForm"
+import { RadioGroup } from "../ui/radio-group"
+import { GenderOptions } from "@/constants"
 
 
 
@@ -65,6 +67,7 @@ const RegisterForm =({user}:{user:User}) => {
         fieldType={FormFieldType.INPUT}
         control={form.control}
         name="name"
+        label="Full Name"
         placeholder="John Doe"
         iconSrc="/assets/icons/user.svg"
         iconAlt="user"
@@ -87,9 +90,45 @@ const RegisterForm =({user}:{user:User}) => {
           control={form.control}
           name="phone"
           label="Phone number"
-          placeholder="(555) 123-4567" iconSrc={""}        />
-        </div>
+          placeholder="(555) 123-4567" iconSrc={""}        
+          />
 
+        </div>
+          <div className="flex flex-col gap-6 xl:flex-row">
+
+          <CustomFormField
+            fieldType={FormFieldType.DATE_PICKER}
+            control={form.control}
+            name="birthDate"
+            label="Date of Birth" iconSrc={""}            />
+
+        <CustomFormField
+            fieldType={FormFieldType.SKELETON}
+            control={form.control}
+            name="gender"
+            label="Gender"
+            renderSkeleton={(field) => (
+              <FormControl>
+                <RadioGroup 
+                className="flex h-11 gap-6 xl:justify-between" 
+                onValueChange={field.onChange} 
+                defaultValue={field.value}
+                >
+                    {GenderOptions}
+                </RadioGroup>
+
+              </FormControl>
+            )} iconSrc={""}   />
+
+          </div>
+
+          <div className="flex flex-col gap-6 xl:flex-row">
+              
+          </div>
+
+          <div className="flex flex-col gap-6 xl:flex-row">
+              
+          </div>
       <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
     </form>
   </Form>
