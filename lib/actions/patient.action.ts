@@ -40,3 +40,13 @@ export const createUser = async (user: CreateUserParams) => {
 }
 }
 
+
+export const getUser = async (userId: string) => {
+  try {
+    const user = await users.get(userId); 
+
+    return
+  } catch (error) {
+    console.log(error);
+  }
+}
