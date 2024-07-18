@@ -16,6 +16,8 @@ import Register from "@/app/patients/[userId]/register/page"
 import { FormFieldType } from "./PatientForm"
 import { RadioGroup } from "../ui/radio-group"
 import { GenderOptions } from "@/constants"
+import { RadioGroupItem } from "@radix-ui/react-radio-group"
+import { Label } from "@/components/ui/label";
 
 
 
@@ -114,7 +116,14 @@ const RegisterForm =({user}:{user:User}) => {
                 onValueChange={field.onChange} 
                 defaultValue={field.value}
                 >
-                    {GenderOptions}
+                    {GenderOptions.map((option) => (
+                      <div key={option} className="radio-group">
+                        <RadioGroupItem value={option} id={option} />
+                        <Label htmlFor={option} className="cursor-pointer">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
                 </RadioGroup>
 
               </FormControl>
