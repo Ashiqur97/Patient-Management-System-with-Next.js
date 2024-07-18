@@ -17,6 +17,9 @@ import PhoneInput from 'react-phone-number-input'
 import { E164Number } from "libphonenumber-js/core";
 import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
+
+
 interface CustomProps {
     control: Control<any>;
     name: string;
@@ -73,6 +76,7 @@ const RenderField = ({field,props}: {field:any; props:CustomProps}) => {
         )
 
     case FormFieldType.DATE_PICKER:
+
       return (
             <div className="flex rounded-md border border-dark-500 bg-dark-400">
               <Image
@@ -95,7 +99,7 @@ const RenderField = ({field,props}: {field:any; props:CustomProps}) => {
             </div>
 
           );
-          case FormFieldType.SKELETON:
+        case FormFieldType.SKELETON:
             return props.renderSkeleton ? props.renderSkeleton(field) : null;
 
     default:
