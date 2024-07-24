@@ -134,15 +134,25 @@ const RegisterForm =({user}:{user:User}) => {
 
           </div>
 
-          <section className="space-y-6">
+          {/* <section className="space-y-6">
         <div className="mb-9 space-y-1">
           <h2 className="sub-header">Medical Information</h2>
         </div>
-      </section>
+      </section> */}
 
 
           <div className="flex flex-col gap-6 xl:flex-row">
-              
+
+          <CustomFormField
+          fieldType={FormFieldType.INPUT}
+          control={form.control}
+          name="adress"
+          label="Adress"
+          placeholder="14th Street, New York"
+          iconSrc="/assets/icons/email.svg"
+          iconAlt="email"
+        />
+        
           </div>
 
           <div className="flex flex-col gap-6 xl:flex-row">
