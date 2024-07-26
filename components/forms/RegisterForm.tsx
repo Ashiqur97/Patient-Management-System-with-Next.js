@@ -139,8 +139,6 @@ const RegisterForm =({user}:{user:User}) => {
 
           </div>
 
-      
-
 
           <div className="flex flex-col gap-6 xl:flex-row">
 
@@ -205,12 +203,62 @@ const RegisterForm =({user}:{user:User}) => {
               </SelectItem>
             ))}
 
-            </CustomFormField>`
-            
-          
+            </CustomFormField>
+
         <div className="flex flex-col gap-6 xl:flex-row">
-                
+        <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="insuranceProvider"
+              label="Insurance provider"
+              placeholder="BlueCross BlueShield"
+            />
+
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="insurancePolicyNumber"
+              label="Insurance policy number"
+              placeholder="ABC123456789"
+            />                
         </div>
+
+        <div className="flex flex-col gap-6 xl:flex-row">
+        <CustomFormField
+              fieldType={FormFieldType.TEXTAREA}
+              control={form.control}
+              name="allergies"
+              label="Allergies (if any)"
+              placeholder="Peanuts, Penicillin, Pollen"
+            />
+
+            <CustomFormField
+              fieldType={FormFieldType.TEXTAREA}
+              control={form.control}
+              name="currentMedication"
+              label="Current medications"
+              placeholder="Ibuprofen 200mg, Levothyroxine 50mcg"
+            />
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+              fieldType={FormFieldType.TEXTAREA}
+              control={form.control}
+              name="familyMedicalHistory"
+              label=" Family medical history (if relevant)"
+              placeholder="Mother had brain cancer, Father has hypertension"
+            />
+
+            <CustomFormField
+              fieldType={FormFieldType.TEXTAREA}
+              control={form.control}
+              name="pastMedicalHistory"
+              label="Past medical history"
+              placeholder="Appendectomy in 2015, Asthma diagnosis in childhood"
+            />
+          </div>
+
       <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
     </form>
   </Form>

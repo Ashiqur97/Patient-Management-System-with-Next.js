@@ -15,7 +15,7 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
-// import { Textarea } from "./ui/textarea";
+import { Textarea } from "./ui/Textarea";
 
 export enum FormFieldType {
   INPUT = "input",
