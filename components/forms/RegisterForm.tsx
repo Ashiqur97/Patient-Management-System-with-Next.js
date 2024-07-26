@@ -16,9 +16,14 @@ import Register from "@/app/patients/[userId]/register/page"
 import { FormFieldType } from "./PatientForm"
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { GenderOptions } from "@/constants"
-
-
+import { SelectItem } from "@/components/ui/select";
+import Image from "next/image";
+import {
+  Doctors,
+  GenderOptions,
+  IdentificationTypes,
+  PatientFormDefaultValues,
+} from "@/constants";
 
 const RegisterForm =({user}:{user:User}) => {
   const router = useRouter()
@@ -179,8 +184,32 @@ const RegisterForm =({user}:{user:User}) => {
         </div>
       </section>
 
+      <CustomFormField
+          fieldType={FormFieldType.SELECT}
+          control={form.control}
+          name="primaryPhysician"
+          label="Primary care physician"
+          placeholder="Select a physician" iconSrc={""}>
+                  {Doctors.map((doctor, i) => (
+              <SelectItem key={doctor.name + i} value={doctor.name}>
+                <div className="flex cursor-pointer items-center gap-2">
+                  <Image
+                    src={doctor.image}
+                    width={32}
+                    height={32}
+                    alt="doctor"
+                    className="rounded-full border border-dark-500"
+                  />
+                  <p>{doctor.name}</p>
+                </div>
+              </SelectItem>
+            ))}
+
+            </CustomFormField>`
+            
+          
         <div className="flex flex-col gap-6 xl:flex-row">
-              
+                
         </div>
       <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
     </form>
