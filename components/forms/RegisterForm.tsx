@@ -148,7 +148,7 @@ const RegisterForm =({user}:{user:User}) => {
           name="adress"
           label="Adress"
           placeholder="14th Street, New York"
-          iconSrc="/assets/icons/email.svg"
+          // iconSrc="/assets/icons/email.svg"
           iconAlt="email"
         />
         
@@ -276,8 +276,16 @@ const RegisterForm =({user}:{user:User}) => {
                   {type}
               </SelectItem>
             ))}
-
             </CustomFormField>
+
+            <CustomFormField
+          fieldType={FormFieldType.INPUT}
+          control={form.control}
+          name="identificationNumber"
+          label="Identification number"
+          placeholder="123456789"
+          iconAlt="identification"
+        />
 
       <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
     </form>
