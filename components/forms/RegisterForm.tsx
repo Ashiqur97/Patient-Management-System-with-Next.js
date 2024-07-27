@@ -24,6 +24,7 @@ import {
   IdentificationTypes,
   PatientFormDefaultValues,
 } from "@/constants";
+import FileUploader from "../FileUploader"
 
 const RegisterForm =({user}:{user:User}) => {
   const router = useRouter()
@@ -285,6 +286,20 @@ const RegisterForm =({user}:{user:User}) => {
           label="Identification number"
           placeholder="123456789"
           iconAlt="identification"
+        />
+
+        <CustomFormField
+          fieldType={FormFieldType.SKELETON}
+          control={form.control}
+          name="identificationImage"
+          label="Scanned copy of identification document"
+          renderSkeleton={(field) =>(
+            <FormControl>
+              <FileUploader
+                
+              />
+            </FormControl>
+          )}
         />
 
       <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
