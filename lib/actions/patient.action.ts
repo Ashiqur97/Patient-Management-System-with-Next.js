@@ -4,6 +4,7 @@ import { ID, Query } from "node-appwrite";
 
 import {
   BUCKET_ID,
+  database,
   DATABASE_ID,
   ENDPOINT,
   PATIENT_COLLECTION_ID,
@@ -62,7 +63,17 @@ export const registerPatient = async ({identificationDocument,...patient}: Regis
         identificationDocument?.get('blobFile') as Blob,
         identificationDocument?.get('fileName') as string,
       );
+
+      file = await storage.createFile(BUCKET_ID!,ID.unique(),inputFile)
     }
+    const patient = await database.createDocument(
+      DATABASE_ID!,
+      PATIENT_COLLECTION_ID!,
+      ID.unique(),
+      {
+        
+      }
+    )
   } catch (error) {
     console.log(error);
   }
