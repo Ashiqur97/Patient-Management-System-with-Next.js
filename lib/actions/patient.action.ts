@@ -66,15 +66,23 @@ export const registerPatient = async ({identificationDocument,...patient}: Regis
 
       file = await storage.createFile(BUCKET_ID!,ID.unique(),inputFile)
     }
-    const patient = await database.createDocument(
+    const newPatient = await database.createDocument(
       DATABASE_ID!,
       PATIENT_COLLECTION_ID!,
       ID.unique(),
       {
-        
+        identificationDocumentId: file?.$id ? file.$id : null,
+        identificationDocumentUrl: file?.$id
+          ? `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file.$id}/view??project=${PROJECT_ID}` : null,
+          ...patient
       }
     )
+    return parseStringify(newPatient);
+    
   } catch (error) {
     console.log(error);
   }
 }
+
+
+

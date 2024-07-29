@@ -11,7 +11,7 @@ import { useState } from "react"
 import { PatientFormValidation, UserFormValidation } from "@/lib/validation"
 import { create } from "domain"
 import { useRouter } from "next/navigation"
-import { createUser } from "@/lib/actions/patient.action"
+import { createUser, registerPatient } from "@/lib/actions/patient.action"
 import Register from "@/app/patients/[userId]/register/page"
 import { FormFieldType } from "./PatientForm"
 import { Label } from "@/components/ui/label";
@@ -47,22 +47,29 @@ const RegisterForm =({user}:{user:User}) => {
 
     let formData;
     if (
+      //@ts-ignore
       values.identificationDocument &&
+      //@ts-ignore
       values.identificationDocument?.length > 0
     ) {
+      //@ts-ignore
       const blobFile = new Blob([values.identificationDocument[0]], {
+        //@ts-ignore
         type: values.identificationDocument[0].type,
       });
 
       formData = new FormData();
       formData.append("blobFile", blobFile);
+      // @ts-ignore
       formData.append("fileName", values.identificationDocument[0].name);
     }
 
     try {
       const patientData = {
+        //@ts-ignore
       ...Values,
       userId: user.$id,
+      // @ts-ignore
       birthDate: new Date(values.birthDate),
       identificationDocument:formData,
       }
@@ -349,7 +356,7 @@ const RegisterForm =({user}:{user:User}) => {
         label="I consent to privsay policy"
       />
 
-      <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+<SubmitButton isLoading={isLoading}>Submit and Continue</SubmitButton>
     </form>
   </Form>
   )

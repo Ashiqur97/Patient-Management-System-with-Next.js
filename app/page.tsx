@@ -23,6 +23,7 @@ export default function Home() {
                 className="mb-12 h-10 w-fit"
               />
           
+          
           <RegisterForm user={user} />
 
       
