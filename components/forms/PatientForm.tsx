@@ -9,6 +9,10 @@ import CustomFormField from "../CustomFormField"
 import SubmitButton from "../SubmitButton"
 import { useState } from "react"
 import 'react-phone-number-input/style.css'
+import { UserFormValidation } from "@/lib/validation"
+import {useRouter} from 'next/navigation';
+import { createUser } from "@/lib/actions/patient.action"
+
 
 export enum FormFieldType {
   INPUT = "input",
@@ -20,23 +24,33 @@ export enum FormFieldType {
   SKELETON = "skeleton",
 }
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-})
+
  
 const PatientForm = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false)
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+
+  const form = useForm<z.infer<typeof UserFormValidation>>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      username: "",
+      name: "",
+      email: "",
+      phone: "",
     },
   })
  
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  async function onSubmit({name,email,phone}: z.infer<typeof UserFormValidation>) {
+    setIsLoading(true);
+
+    try {
+      // const user = {name,email,phone};
+      
+      // const newUser = await createUser {user};
+
+      // if(user) router.push(`/patients/${newUser.$id}/register`);
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <Form {...form}>
@@ -60,8 +74,8 @@ const PatientForm = () => {
           <CustomFormField 
           fieldType={FormFieldType.INPUT}
             control={form.control}
-            name="name"
-            label="Full Name"
+            name="email"
+            label="Email"
             placeholder="jhondoe@jsmastery.com"
             iconSrc = "/assets/icons/email.svg"
             iconAlt = "email"
