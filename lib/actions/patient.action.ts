@@ -15,6 +15,7 @@ import {
 import { parseStringify } from "../utils";
 
 import {InputFile} from "node-appwrite/file";
+import { parse } from "path";
 
 // CREATE APPWRITE USER
 export const createUser = async (user: CreateUserParams) => {
@@ -48,7 +49,8 @@ export const getUser = async (userId: string) => {
   try {
     const user = await users.get(userId); 
 
-    return
+    return parseStringify(user);
+    
   } catch (error) {
     console.log(error);
   }

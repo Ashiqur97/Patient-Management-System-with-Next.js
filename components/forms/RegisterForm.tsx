@@ -12,21 +12,10 @@ import 'react-phone-number-input/style.css'
 import { UserFormValidation } from "@/lib/validation"
 import {useRouter} from 'next/navigation';
 import { createUser } from "@/lib/actions/patient.action"
+import { FormFieldType } from "./PatientForm"
 
 
-export enum FormFieldType {
-  INPUT = "input",
-  TEXTAREA = "textarea",
-  PHONE_INPUT = "phone_input",	
-  CHECKBOX = "checkbox",
-  DATE_PICKER = "datePicker",
-  SELECT = "select",
-  SKELETON = "skeleton",
-}
-
-
- 
-const RegisterForm= () => {
+const RegisterForm= ({user}: {user:User}) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false)
 
@@ -56,10 +45,10 @@ const RegisterForm= () => {
   }
   return (
     <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
-        <section className="mb-12 space-y-4">
-                <h1 className="header">Hi there 👋</h1>
-                <p className="text-dark-700">Schedule Your First Appointment</p>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 flex-1">
+        <section className="space-y-4">
+                <h1 className="header">Welcome 👋</h1>
+                <p className="text-dark-700">Let us know more about yourself</p>
         </section>
 
         <CustomFormField 
@@ -73,7 +62,7 @@ const RegisterForm= () => {
 
         />
 
-          <CustomFormField 
+          {/* <CustomFormField 
           fieldType={FormFieldType.INPUT}
             control={form.control}
             name="email"
@@ -89,7 +78,7 @@ const RegisterForm= () => {
           name="phone"
           label="Phone Number"
           placeholder="(555) 123-4567"
-        />
+        /> */}
 
       <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
     </form>
