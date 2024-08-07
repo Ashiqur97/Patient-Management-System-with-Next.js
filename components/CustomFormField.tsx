@@ -38,15 +38,15 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const {fieldType,iconSrc,iconAlt,placeholder,showTimeSelect,dateFormat,renderSkeleton} = props;
 
   switch (fieldType) {
-    case FormFieldType.INPUT:
+      case FormFieldType.INPUT:
       return (
         <div className="flex rounded-md border border-dark-500 bg-dark-400">
-          {iconSrc && (
+          {props.iconSrc && (
             <Image
-              src={iconSrc}
+              src={props.iconSrc}
               height={24}
               width={24}
-              alt={props.iconAlt || 'icon'}
+              alt={props.iconAlt || "icon"}
               className="ml-2"
             />
           )}
@@ -60,43 +60,43 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         </div>
       );
       
-      case FormFieldType.PHONE_INPUT:
-        return (
-          <FormControl>
-              <PhoneInput
+   case FormFieldType.PHONE_INPUT:
+      return (
+        <FormControl>
+          <PhoneInput
             defaultCountry="US"
-            placeholder={placeholder}
+            placeholder={props.placeholder}
             international
             withCountryCallingCode
             value={field.value as E164Number | undefined}
             onChange={field.onChange}
             className="input-phone"
           />
-          </FormControl>
-        )
+        </FormControl>
+      );
 
-      case FormFieldType.DATE_PICKER:
-        return (
-          <div className="flex rounded-md border border-dark-500 bg-dark-400">
-              <Image 
-                src="/assets/icons/calendar.svg"
-                height={24}
-                width={24}
-                alt="calendar"
-                className="ml-2"
-              />
-              <FormControl>
-              <DatePicker selected={field.value} 
-              onChange={(date) => field.onChange(date)}
-              dateFormat={dateFormat ?? "MM/dd/yyyy"}
-              showTimeSelect={showTimeSelect ?? false}
-              timeInputLabel="Time"
+   case FormFieldType.DATE_PICKER:
+      return (
+        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+          <Image
+            src="/assets/icons/calendar.svg"
+            height={24}
+            width={24}
+            alt="user"
+            className="ml-2"
+          />
+          <FormControl>
+            <DatePicker
+              showTimeSelect={props.showTimeSelect ?? false}
+              selected={field.value}
+              onChange={(date: Date) => field.onChange(date)}
+              timeInputLabel="Time:"
+              dateFormat={props.dateFormat ?? "MM/dd/yyyy"}
               wrapperClassName="date-picker"
-              />
-
-              </FormControl>
-          </div>
-        )
+            />
+          </FormControl>
+        </div>
+      );
       
         case FormFieldType.SKELETON:
           return props.renderSkeleton ? props.renderSkeleton(field) : null;
