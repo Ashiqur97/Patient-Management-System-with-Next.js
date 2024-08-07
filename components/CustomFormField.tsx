@@ -16,7 +16,6 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { E164Number } from "libphonenumber-js/core";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 
 
@@ -36,13 +35,15 @@ interface CustomProps {
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
-  switch (props.fieldType) {
+  const {fieldType,iconSrc,iconAlt,placeholder,showTimeSelect,dateFormat,renderSkeleton} = props;
+
+  switch (fieldType) {
     case FormFieldType.INPUT:
       return (
         <div className="flex rounded-md border border-dark-500 bg-dark-400">
-          {props.iconSrc && (
+          {iconSrc && (
             <Image
-              src={props.iconSrc}
+              src={iconSrc}
               height={24}
               width={24}
               alt={props.iconAlt || 'icon'}
@@ -64,7 +65,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           <FormControl>
               <PhoneInput
             defaultCountry="US"
-            placeholder={props.placeholder}
+            placeholder={placeholder}
             international
             withCountryCallingCode
             value={field.value as E164Number | undefined}
@@ -86,13 +87,21 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               />
               <FormControl>
               <DatePicker selected={field.value} 
-              onChange={(date) => field.onChange(date)} />
-              
+              onChange={(date) => field.onChange(date)}
+              dateFormat={dateFormat ?? "MM/dd/yyyy"}
+              showTimeSelect={showTimeSelect ?? false}
+              timeInputLabel="Time"
+              wrapperClassName="date-picker"
+              />
+
               </FormControl>
           </div>
         )
+      
+        case FormFieldType.SKELETON:
+          return props.renderSkeleton ? props.renderSkeleton(field) : null;
       default:
-      break;
+      return null;
   }
 }
 
