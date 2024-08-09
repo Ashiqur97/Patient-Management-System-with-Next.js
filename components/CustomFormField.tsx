@@ -17,7 +17,7 @@ import PhoneInput from 'react-phone-number-input'
 import { E164Number } from "libphonenumber-js/core";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Select } from "@radix-ui/react-select"
+import { Select,SelectValue } from "@radix-ui/react-select"
 
 
 interface CustomProps {
@@ -105,8 +105,8 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       return (
         <FormControl>
           <Select onValueChange={field.change} defaultValue={field.value}>
-              <FormControl>
-                
+              <FormControl className="shad-select-trigger">
+                  <SelectValue placeholder = {placeholder} />
               </FormControl>
           </Select>
         </FormControl>
