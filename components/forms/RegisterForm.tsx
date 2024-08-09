@@ -14,8 +14,9 @@ import {useRouter} from 'next/navigation';
 import { createUser } from "@/lib/actions/patient.action"
 import { FormFieldType } from "./PatientForm"
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group"
-import { GenderOptions } from "@/constants"
+import { Doctors, GenderOptions } from "@/constants"
 import { Label } from "@radix-ui/react-label"
+import { SelectItem } from "../ui/select"
 
 
 const RegisterForm= ({user}: {user:User}) => {
@@ -163,12 +164,28 @@ const RegisterForm= ({user}: {user:User}) => {
               placeholder="(555) 123-4567"
             />
         </div>
-        
+
         <section className="space-y-6">
               <div className="mb-9 space-y-1">
                   <h2 className="sub-header">Mediacal Information</h2>
               </div>
         </section>
+
+            <CustomFormField
+              fieldType={FormFieldType.SELECT}
+              control={form.control}
+              name="primaryPhysician"
+              label="Primary Physician"
+              placeholder="Select a Physician"
+            >
+              {Doctors.map((doctor) => (
+                <SelectItem key={doctor.name} value={doctor.name}>
+                      <div className="flex cursor-pointer items-center gap-2">
+                          
+                      </div>
+                </SelectItem>
+              ))}
+            </CustomFormField>
 
         <div className="flex flex-col gap-6 xl:flex-row">
             
