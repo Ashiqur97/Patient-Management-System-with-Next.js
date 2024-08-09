@@ -17,6 +17,7 @@ import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group"
 import { Doctors, GenderOptions } from "@/constants"
 import { Label } from "@radix-ui/react-label"
 import { SelectItem } from "../ui/select"
+import Image from "next/image";
 
 
 const RegisterForm= ({user}: {user:User}) => {
@@ -181,7 +182,14 @@ const RegisterForm= ({user}: {user:User}) => {
               {Doctors.map((doctor) => (
                 <SelectItem key={doctor.name} value={doctor.name}>
                       <div className="flex cursor-pointer items-center gap-2">
-                          
+                          <Image 
+                            src={doctor.image}
+                            width={32}
+                            height={32}
+                            alt={doctor.name}
+                            className="rounded-full border border-dark-500"
+                          />
+                          <p>{doctor.name}</p>
                       </div>
                 </SelectItem>
               ))}
