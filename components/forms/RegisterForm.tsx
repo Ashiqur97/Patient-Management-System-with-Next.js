@@ -18,6 +18,7 @@ import { Doctors, GenderOptions, IdentificationTypes } from "@/constants"
 import { Label } from "@radix-ui/react-label"
 import { SelectItem } from "../ui/select"
 import Image from "next/image";
+import FileUploader from "../FileUploader"
 
 
 const RegisterForm= ({user}: {user:User}) => {
@@ -289,10 +290,8 @@ const RegisterForm= ({user}: {user:User}) => {
               <div className="mb-9 space-y-1">
                   <h2 className="sub-header">Identification and Verification</h2>
               </div>
-        </section>
 
-
-        <CustomFormField
+              <CustomFormField
               fieldType={FormFieldType.SELECT}
               control={form.control}
               name="identificationType"
@@ -306,6 +305,28 @@ const RegisterForm= ({user}: {user:User}) => {
               ))}
             </CustomFormField>
 
+            <CustomFormField 
+                fieldType={FormFieldType.INPUT}
+                control={form.control}
+                name="identificationNumber"
+                label="Identification number"
+                placeholder="123456789"
+              />
+
+          <CustomFormField
+            fieldType={FormFieldType.SKELETON}
+            control={form.control}
+            name="identificationDocument"
+            label="Scanned Copy of Identification Document"
+            renderSkeleton={(field) => (
+              <FormControl>
+                <FileUploader files={field.value} onChange={field.onChange} />
+              </FormControl>
+            )}
+          />
+        </section>
+
+            
       <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
     </form>
   </Form>
