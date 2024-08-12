@@ -11,7 +11,7 @@ import { useState } from "react"
 import 'react-phone-number-input/style.css'
 import { PatientFormValidation, UserFormValidation } from "@/lib/validation"
 import {useRouter} from 'next/navigation';
-import { createUser } from "@/lib/actions/patient.action"
+import { createUser, registerPatient } from "@/lib/actions/patient.action"
 import { FormFieldType } from "./PatientForm"
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group"
 import { Doctors, GenderOptions, IdentificationTypes, PatientFormDefaultValues } from "@/constants"
@@ -51,11 +51,16 @@ const RegisterForm= ({user}: {user:User}) => {
     }
 
     try {
-      //  const userData = {name,email,phone};
-      
-      //  const user = await createUser (userData);
+    const patientData = {
+      ...values,
+      userId:user.$id,
+      birthDate: new Date(values.birthDate),
+      identificationDocument: formData, 
+    }
+    //@ts-ignore
+    const patient = await registerPatient(patientData);
 
-      //  if(user) router.push(`/patients/${user.$id}/register`);
+    if(patient) router.push(`/patients/${user.$id}/new-appointment`)
 
     } catch (error) {
       console.log(error);
