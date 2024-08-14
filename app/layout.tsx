@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 import "./globals.css";
-import {cn} from '@/lib/utils'
+import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+
+import { cn } from "@/lib/utils";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -12,7 +13,11 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   title: "CarePulse",
-  description: "A health care app for everyone",
+  description:
+    "A healthcare patient management System designed to streamline patient registration, appointment scheduling, and medical records management for healthcare providers.",
+  icons: {
+    icon: "/assets/icons/logo-icon.svg",
+  },
 };
 
 export default function RootLayout({
