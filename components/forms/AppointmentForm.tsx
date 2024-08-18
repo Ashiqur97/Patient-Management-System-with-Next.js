@@ -70,8 +70,13 @@ export const AppointmentForm = ({
         status = "pending";
     }
 
+    // console.log('BEFORE THE TYPE',type);
+
     try {
       if (type === "create" && patientId) {
+
+        // console.log('IM HERE');
+
         const appointment = {
           userId,
           patient: patientId,
