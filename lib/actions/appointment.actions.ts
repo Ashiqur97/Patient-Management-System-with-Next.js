@@ -17,3 +17,11 @@ export const  createAppointment = async (appointment: CreateAppointmentParams) =
         console.error(error);
     }
 }
+
+export const getAppointment = async (appointmentId: string) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
