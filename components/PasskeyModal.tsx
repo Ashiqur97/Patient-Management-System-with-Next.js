@@ -29,8 +29,15 @@ const PasskeyModal = () => {
     const [passKey,setPassKey] = useState('');
     const [error,setError] = useState('');
 
-    const validatePasskey = (e) => {
+    const validatePasskey = (e: React.MouseEvent<HTMLButtonElement,MouseEvent>) => {
+        e.preventDefault();
 
+        if(passKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY){
+
+        } else {
+            setError('Invalid Passkey.please try again later');
+        }
+    
     }
     
 
@@ -77,7 +84,8 @@ const PasskeyModal = () => {
             </p>}
             </div>
     <AlertDialogFooter>
-      <AlertDialogAction onClick={(e) => validatePasskey(e)} className="shad-primary-btn w-full">
+      <AlertDialogAction onClick={(e) => validatePasskey(e)} 
+      className="shad-primary-btn w-full">
             Enter Admin Passkey 
       </AlertDialogAction>
     </AlertDialogFooter>
