@@ -16,12 +16,10 @@ import {
     InputOTPSeparator,
     InputOTPSlot,
   } from "@/components/ui/input-otp"
-import { Value } from "@radix-ui/react-select";
-  
-
+import { encryptKey } from "@/lib/utils";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const PasskeyModal = () => {
     const router = useRouter();
@@ -29,10 +27,18 @@ const PasskeyModal = () => {
     const [passKey,setPassKey] = useState('');
     const [error,setError] = useState('');
 
+    const encryptedKey = typeof window !== 'undefined' ? window.localStorage.getItem('accessKey') : null;
+
+    useEffect(() => {
+        
+    },[])
     const validatePasskey = (e: React.MouseEvent<HTMLButtonElement,MouseEvent>) => {
         e.preventDefault();
 
         if(passKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY){
+            const encryptedKey = encryptKey(passKey);
+            localStorage.setItem('accessKey',encryptedKey);
+            setOpen(false);
 
         } else {
             setError('Invalid Passkey.please try again later');
