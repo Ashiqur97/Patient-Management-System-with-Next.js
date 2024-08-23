@@ -10,6 +10,15 @@ import {
     AlertDialogTitle,
   } from "@/components/ui/alert-dialog"
 
+  import {
+    InputOTP,
+    InputOTPGroup,
+    InputOTPSeparator,
+    InputOTPSlot,
+  } from "@/components/ui/input-otp"
+import { Value } from "@radix-ui/react-select";
+  
+
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -17,6 +26,7 @@ import { useState } from 'react';
 const PasskeyModal = () => {
     const router = useRouter();
     const [open,setOpen] = useState(true);
+    const [passKey,setPassKey] = useState('');
     
 
     const closeModal = () => {
@@ -45,6 +55,19 @@ const PasskeyModal = () => {
         To access the admin page,please enter the passKey.
       </AlertDialogDescription>
     </AlertDialogHeader>
+
+            <div>
+                <InputOTP maxLength={6} value={passKey} onChange={(value) => setPassKey(value)}>
+        <InputOTPGroup className="shad-otp">
+                <InputOTPSlot className="shad-otp-slot" index={0} />
+                <InputOTPSlot className="shad-otp-slot"  index={1} />
+                <InputOTPSlot className="shad-otp-slot"  index={2} />
+                <InputOTPSlot className="shad-otp-slot"  index={3} />
+                <InputOTPSlot className="shad-otp-slot"  index={4} />
+                <InputOTPSlot className="shad-otp-slot"  index={5} />
+            </InputOTPGroup>
+        </InputOTP>
+            </div>
     <AlertDialogFooter>
       <AlertDialogCancel>Cancel</AlertDialogCancel>
       <AlertDialogAction>Continue</AlertDialogAction>
