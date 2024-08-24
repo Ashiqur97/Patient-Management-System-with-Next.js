@@ -10,7 +10,11 @@ interface StateCardProps {
 
 const StatCard = ({count=0, label, icon,type}: StateCardProps) => {
   return (
-    <div className={clsx('stat-card')}>
+    <div className={clsx('stat-card',{
+      'bg-appointments': type === 'appointments',
+      'bg-pending': type === 'pending',
+      'bg-cancelled': type === 'cancelled',
+    })}>
         test
     </div>
   )
