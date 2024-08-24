@@ -15,7 +15,9 @@ const StatCard = ({count=0, label, icon,type}: StateCardProps) => {
       'bg-pending': type === 'pending',
       'bg-cancelled': type === 'cancelled',
     })}>
-        test
+       <div className='flex items-center gap-4'>
+            
+       </div>
     </div>
   )
 }
