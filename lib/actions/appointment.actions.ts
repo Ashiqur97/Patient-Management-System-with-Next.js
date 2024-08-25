@@ -67,8 +67,13 @@ export const getRecentAppointmentList = async () => {
             documents: appointments.documents
         }
 
+        return parseStringify(data);
+
     } catch (error) {
         console.log(error);
         
     }
 }
+
+
+
