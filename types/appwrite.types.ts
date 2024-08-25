@@ -25,6 +25,9 @@ export interface Patient extends Models.Document {
 }
 
 export interface Appointment extends Models.Document {
+  cancelledCount: number;
+  pendingCount: number;
+  scheduledCount: number;
   patient: Patient;
   schedule: Date;
   status: Status;
