@@ -63,7 +63,8 @@ export const getRecentAppointmentList = async () => {
 
         const data = {
             totalCount: appointments.total,
-            scheduledCount: counts.scheduledCount,
+            ...counts,
+            documents: appointments.documents
         }
 
     } catch (error) {
