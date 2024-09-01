@@ -45,7 +45,15 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "schdule",
     header: "Appointment",
+    cell:({row}) => {
+      return (
+        <p className="text-14-regular min-w-[100px]">
+  
+        </p>
+      );
+    }
   },
+
   {
     id: "actions",
     cell: ({ row }) => {
