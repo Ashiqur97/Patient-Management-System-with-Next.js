@@ -87,9 +87,13 @@ export const columns: ColumnDef<Payment>[] = [
 
   {
     id: "actions",
-    header: () => <div className="pl-4">Actions</div>
+    header: () => <div className="pl-4">Actions</div>,
     cell: ({ row }) => {
-      
+      return (
+        <div className="flex gap-1">
+            
+        </div>
+      )
     },
   },
 ]
