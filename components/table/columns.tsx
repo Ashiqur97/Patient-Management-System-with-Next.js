@@ -12,10 +12,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { StatusBadge } from "../StatusBadge"
+import { formatDateTime } from "@/lib/utils"
+import Image from "next/image"
+import { Doctors } from "@/constants"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Payment = {
+  patient: any
+  schedule(schedule: any): unknown
+  primaryPhysician: any
   id: string
   amount: number
   status: "pending" | "processing" | "success" | "failed"
@@ -48,10 +54,35 @@ export const columns: ColumnDef<Payment>[] = [
     cell:({row}) => {
       return (
         <p className="text-14-regular min-w-[100px]">
-  
+            {formatDateTime(row.original.schedule).dateTime}
         </p>
       );
     }
+  },
+ 
+  {
+    accessorKey: "primaryPhysician",
+    header: "Doctor",
+    cell: ({ row }) => {
+      const appointment = row.original;
+
+      const doctor = Doctors.find(
+        (doctor: { name: any }) => doctor.name === appointment.primaryPhysician
+      );
+
+      return (
+        <div className="flex items-center gap-3">
+          <Image
+            src={doctor?.image!}
+            alt="doctor"
+            width={100}
+            height={100}
+            className="size-8"
+          />
+          <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
+        </div>
+      );
+    },
   },
 
   {
@@ -80,20 +111,6 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuContent>
         </DropdownMenu>
       )
-    },
-  },
- 
-  {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
- 
-      return <div className="text-right font-medium">{formatted}</div>
     },
   },
 ]
