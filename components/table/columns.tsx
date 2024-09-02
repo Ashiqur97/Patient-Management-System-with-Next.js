@@ -15,6 +15,7 @@ import { StatusBadge } from "../StatusBadge"
 import { formatDateTime } from "@/lib/utils"
 import Image from "next/image"
 import { Doctors } from "@/constants"
+import { AppointmentModal } from "../AppointmentModal."
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -91,7 +92,7 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex gap-1">
-            
+            <AppointmentModal patientId={""} userId={""} type={"schedule"} title={""} description={""} />
         </div>
       )
     },
