@@ -11,7 +11,7 @@ import { SelectItem } from "@/components/ui/select";
 import { Doctors } from "@/constants";
 import {
   createAppointment,
-  updateAppointment,
+  updatedAppointment,
 } from "@/lib/actions/appointment.actions";
 import { getAppointmentSchema } from "@/lib/validation";
 import { Appointment } from "@/types/appwrite.types";
